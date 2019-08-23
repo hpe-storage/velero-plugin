@@ -19,8 +19,8 @@ type volumesnapshotter struct {
 }
 
 func (v *volumesnapshotter) Init(config map[string]string) error {
-	v.Log.Infof(">>> Init hpe volumesnapshotter with config %+v", config)
-	defer v.Log.Infof("<<<< Init")
+	v.Log.Infof(">>>>> Init hpe volumesnapshotter with config %+v", config)
+	defer v.Log.Infof("<<<<< Init")
 	clusterConfig, err := rest.InClusterConfig()
 	if err != nil {
 		return fmt.Errorf("error getting config cluster - %s", err.Error())
