@@ -24,19 +24,36 @@ spec:
   }
 ```
 
-### 2. Create secret to communicate with HPE Nimble Storage CSP Service
+### 2. Deploy a Container Service Provider service
+
+In order for the snapshotter to perform snapshots, it needs to communicate with a CSP.
+Currently only HPE Nimble Storage provides a CSP and the rest of the installation assumes Nimble.
+
+Create a CSP secret that maps to a Nimble array management IP address and "Power User" (or Administrator):
 
 ```markdown
 
-https://raw.githubusercontent.com/hpe-storage/csi-driver/master/examples/kubernetes/secret.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: nimble-secret
+  namespace: kube-system
+stringData:
+  serviceName: nimble-csp-svc
+  servicePort: "8080"
+  backend: 192.168.1.1
+  username: admin
+data:
+  # echo -n admin | base64
+  password: YWRtaW4=
 
 ```
 
-### 3. Deploy the CSP service for HPE Nimble Storage in velero namespace
+Deploy the CSP (it will be deployed in the `velero` namespace on the cluster)
 
-The CSP yaml file is located at [nimble-csp.yaml](nimble-csp.yaml)
+```kubectl create -f https://raw.githubusercontent.com/hpe-storage/velero-plugin/master/nimble-csp.yaml```
 
-### 4. Install velero HPE blockstore plugin
+### 3. Install Velero HPE blockstore plugin
 
 ```markdown
 

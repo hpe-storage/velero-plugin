@@ -1,4 +1,4 @@
-# Configuration to deploy the HPE Nimble Storage CSP service
+# Configuration to deploy the HPE Nimble Storage CSP service for Velero
 #
 # example usage: kubectl create -f <this_file>
 
