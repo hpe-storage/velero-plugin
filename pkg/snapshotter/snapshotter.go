@@ -43,7 +43,7 @@ func (s *Snapshotter) GetVolumeID(unstructuredPV runtime.Unstructured) (string, 
 		return "", errors.WithStack(err)
 	}
 	if pv.Spec.CSI == nil {
-		return "", fmt.Errorf("unable to retrieve CSI Spec frpm pv %+v", pv)
+		return "", fmt.Errorf("unable to retrieve CSI Spec from pv %+v", pv)
 	}
 	if pv.Spec.CSI.VolumeHandle == "" {
 		return "", fmt.Errorf("unable to retrieve Volume handle from pv %+v", pv)
